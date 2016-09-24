@@ -7,6 +7,7 @@ const db = require(__base + 'models');
 
 var app = express();
 process.env.NODE_ENV = config.NODE_ENV;
+__env = process.env.NODE_ENV;
 
 app.use('/', express.static(__base + 'public/'));
 app.use(router);

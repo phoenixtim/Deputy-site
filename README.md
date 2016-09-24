@@ -7,6 +7,7 @@
 ### Development
 + gulp
 
+
 # Install
 1. git clone
 2. npm install
@@ -24,6 +25,7 @@
 2. ln -s ../../../node_modules/react/dist/react.js public/libs/js/react.js
 3. ln -s ../../../node_modules/react-dom/dist/react-dom.js public/libs/js/react-dom.js
 4. ln -s ../../../node_modules/react-router/umd/ReactRouter.js public/libs/js/ReactRouter.js
+
 
 # Start
 
