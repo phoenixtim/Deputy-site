@@ -8,7 +8,7 @@ var Second = React.createClass({
   render: function () {
     return (
       <div className='second_page'>
-        <h2 className='ui header'>{this.state.currentRoute.pageTitle}</h2>
+        {/* <h2 className='ui header'>{this.state.currentRoute.pageTitle}</h2> */}
         {this.props.children}
       </div>
     );

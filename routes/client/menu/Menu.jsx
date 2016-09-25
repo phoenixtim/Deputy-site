@@ -8,13 +8,13 @@ var Menu = React.createClass({
     const third = this.props.routesModule.getPage('third');
 
     return (
-      <div className='ui three item menu'>
+      <div className='ui three item huge menu'>
         <IndexLink className='item' activeClassName='active' to={main.fullUrl}>
-          {main.pageLink}</IndexLink>
+          <div className='ui red header'>{main.pageTitle}</div></IndexLink>
         <Link className='item' activeClassName='active' to={second.fullUrl}>
-          {second.pageLink}</Link>
+          <div className='ui red header'>{second.pageTitle}</div></Link>
         <Link className='item' activeClassName='active' to={third.fullUrl}>
-          {third.pageLink}</Link>
+          <div className='ui red header'>{third.pageTitle}</div></Link>
       </div>
     );
   }
