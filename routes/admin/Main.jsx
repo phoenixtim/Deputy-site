@@ -6,7 +6,7 @@ var Main = React.createClass({
   },
 
   render() {
-    var news = [
+    var pages = [
       {
         title: 'new1',
         text: 'new 1 text weklfm;lkwvn klw;emlk pweme pewm [PLD,CQKWEOKFW ;KMWIS;LKDMVSKLFOIWRNV SDLKM;SK SKM ;EDM;LS L;MS;EL ;SM ; SMEM;SEMEWRLEKDN RKM;dflmv;dm  vm;slmv;lsmgs mv;ls]',
@@ -20,18 +20,18 @@ var Main = React.createClass({
     return (
       <div className='main_page'>
         {this.props.children}
-        <News news={news} />
+        <Pages pages={pages} />
       </div>
     );
   },
 });
 module.exports = Main;
 
-var News = React.createClass({
+var Pages = React.createClass({
   render() {
     return (
       <div className='ui justified container'>
-        {this.props.news.map((item, index) => <NewsItem
+        {this.props.pages.map((item, index) => <Page
           key={index}
           title={item.title}
           text={item.text}
@@ -41,18 +41,15 @@ var News = React.createClass({
   },
 });
 
-var NewsItem = React.createClass({
+var Page = React.createClass({
   render() {
-    var currentDate = moment().format('DD/MM/YYYY HH:mm');
-
     return (
-      <div className='ui fluid card'>
+      <div className='ui card'>
         <div className='content'>
           <div className='header'>{this.props.title}</div>
           <div className='description'>{this.props.text}</div>
         </div>
         <div className='extra content'>
-          {currentDate}
         </div>
       </div>
     );

@@ -1,7 +1,11 @@
 const router = require('express').Router();
 
-router.get('/admin', (req, res) => {
-  res.send('There will be admin panel');
+router.get('/*', (req, res) => {
+  if (__env === 'production') {
+    res.sendFile(__base + 'routes/admin/admin_prod.html');
+  } else {
+    res.sendFile(__base + 'routes/admin/admin.html');
+  }
 });
 
 module.exports = router;

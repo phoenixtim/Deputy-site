@@ -25,6 +25,8 @@ gulp.task('clean', () => {
   var files = [
     'public/build/client.js',
     'public/build/client.min.js',
+    'public/build/admin.js',
+    'public/build/admin.min.js',
   ];
 
   for (var num = 0 ; num < files.length ; num++) {
@@ -59,11 +61,22 @@ gulp.task('babel-client', ['clean', 'webpack'], () => {
   .pipe(gulp.dest('public/build'));
 });
 
-gulp.task('restart', ['babel-client'], () => {
+gulp.task('babel-admin', ['clean', 'webpack'], () => {
+  return gulp.src('public/build/admin.js')
+  .pipe(uglify().on('error', (err) => {
+    server.stop();
+    throw err;
+  }))
+  .pipe(rename('admin.min.js'))
+  .pipe(gulp.dest('public/build'));
+});
+
+gulp.task('restart', ['babel-client', 'babel-admin'], () => {
   server.start.bind(server)();
 });
 
-gulp.task('default', ['clean', 'babel-client', 'restart'], () => {
+gulp.task('default', ['clean', 'babel-client', 'babel-admin', 'restart'],
+    () => {
   server.start();
 
   gulp.watch([

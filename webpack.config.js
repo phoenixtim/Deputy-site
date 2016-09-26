@@ -1,8 +1,11 @@
 module.exports = {
-  entry: './routes/client/Router.jsx',
+  entry: {
+    client: './routes/client/Router.jsx',
+    admin: './routes/admin/Router.jsx',
+  },
   output: {
     path: './public/build',
-    filename: 'client.js',
+    filename: '[name].js',
   },
   module: {
     loaders: [
