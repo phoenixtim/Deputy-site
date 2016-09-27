@@ -1,11 +1,11 @@
-import Menu from './menu/Menu.jsx';
+// import Menu from './menu/Menu.jsx';
 
 var Site = React.createClass({
   render() {
     return (
       <div className='site_container'>
         <SiteHeader />
-        <Menu routesModule={this.props.route.routesModule} />
+        {/* <Menu routesModule={this.props.route.routesModule} /> */}
         {this.props.children}
       </div>
     );

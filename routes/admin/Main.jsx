@@ -1,7 +1,9 @@
+import Menu from './menu/Menu.jsx';
+
 var Main = React.createClass({
   getInitialState() {
     return {
-      currentRoute: this.props.route.routesModule.getPage('main'),
+      currentRoute: this.props.route.routesModule.getPage('admin'),
     };
   },
 
@@ -19,8 +21,9 @@ var Main = React.createClass({
 
     return (
       <div className='main_page'>
-        {this.props.children}
+        <Menu currentRoute={this.state.currentRoute} routesModule={this.props.route.routesModule} />
         <Pages pages={pages} />
+        {this.props.children}
       </div>
     );
   },

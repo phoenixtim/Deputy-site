@@ -14,7 +14,7 @@ import routesModule from './routes.js';
 ReactDOM.render(
   (
     <Router history={browserHistory}>
-      <Route path={routesModule.getPage('main').url} component={Site} routesModule={routesModule}>
+      <Route path={routesModule.getPage('admin').fullUrl} component={Site} routesModule={routesModule}>
         <IndexRoute component={Main} routesModule={routesModule} />
         {/* <Route path={routesModule.getPage('second').url} component={Second} routesModule={routesModule} /> */}
         {/* <Route path={routesModule.getPage('third').url} component={Third} routesModule={routesModule} /> */}

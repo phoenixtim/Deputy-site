@@ -1,18 +1,23 @@
 const routes = {
   getPage: getPage,
   main: {
-    url: '/admin/',
-    pageTitle: 'Новости',
+    url: '/',
+    pageTitle: 'Сайт',
     pageLink: 'Главная',
-    second: {
-      url: 'about/',
-      pageTitle: 'О депутате',
-      pageLink: 'О депутате',
-    },
-    third: {
-      url: 'todo/',
-      pageTitle: 'Наказы',
-      pageLink: 'Наказы',
+    admin: {
+      url: 'admin/',
+      pageTitle: 'Управление сайтом',
+      pageLink: 'Управление',
+      second: {
+        url: 'about/',
+        pageTitle: 'О депутате',
+        pageLink: 'О депутате',
+      },
+      third: {
+        url: 'todo/',
+        pageTitle: 'Наказы',
+        pageLink: 'Наказы',
+      },
     },
   },
 };
@@ -34,7 +39,7 @@ function findElement(codename, rootElem, rootChain) {
     }
 
     if (propName === codename) {
-      result = Object.assign({}, rootElem[propName]);
+      result = Object.assign({}, rootElem[propName], {pathToPage: rootChain});
     } else if (Object.prototype.toString(rootElem[propName]) ===
         '[object Object]') {
 
