@@ -1,19 +1,24 @@
 const routes = {
   getPage: getPage,
+  getSubroutes: getSubroutes,
   main: {
+    name: 'main',
     url: '/',
     pageTitle: 'Сайт',
     pageLink: 'Главная',
     admin: {
+      name: 'admin',
       url: 'admin/',
       pageTitle: 'Управление сайтом',
       pageLink: 'Управление',
       second: {
+        name: 'second',
         url: 'about/',
         pageTitle: 'О депутате',
         pageLink: 'О депутате',
       },
       third: {
+        name: 'third',
         url: 'todo/',
         pageTitle: 'Наказы',
         pageLink: 'Наказы',
@@ -64,4 +69,20 @@ function constructFullUrls(routes, constructedUrl) {
     routes[route].fullUrl = constructedUrl + routes[route].url;
     constructFullUrls(routes[route], routes[route].fullUrl);
   }
+}
+
+function getSubroutes(codename) {
+  var route = getPage(codename);
+  var subroutes = [];
+
+  const props = Object.keys(route);
+  for (let propName of props) {
+    if (typeof(route[propName]) !== 'object') {
+      continue;
+    }
+
+    subroutes.push(route[propName]);
+  }
+
+  return subroutes;
 }
