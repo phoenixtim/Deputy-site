@@ -1,69 +1,92 @@
-const routes = {
-  getPage: getPage,
-  getSubroutes: getSubroutes,
-  main: {
-    name: 'main',
-    url: '/',
-    pageTitle: 'Сайт',
-    pageLink: 'Главная',
-    admin: {
-      name: 'admin',
-      url: 'admin/',
-      pageTitle: 'Управление сайтом',
-      pageLink: 'Управление',
-      about: {
+const routes = [
+  // {
+  //   name: 'main',
+  //   url: '/',
+  //   pageTitle: 'Сайт',
+  //   pageLink: 'Главная',
+  //   children: [
+  //   ],
+  // },
+  {
+    name: 'admin',
+    url: '/admin/',
+    pageTitle: 'Управление сайтом',
+    pageLink: 'Управление',
+    component: 'Site',
+    indexComponent: 'Main',
+    children: [
+      {
         name: 'about',
         url: 'about/',
+        component: 'Site',
         pageTitle: 'О депутате',
         pageLink: 'О депутате',
       },
-      todo: {
+      {
         name: 'todo',
         url: 'todo/',
+        component: 'Site',
         pageTitle: 'Наказы',
         pageLink: 'Наказы',
       },
-      news: {
+      {
         name: 'news',
         url: 'news/',
+        component: 'Site',
         pageTitle: 'Новости',
         pageLink: 'Новости',
       },
-    },
+    ],
   },
-};
+];
 constructFullUrls(routes, '');
 
-module.exports = routes;
+module.exports = {
+  routes: routes,
+  getPage: getPage,
+  getSubroutes: getSubroutes,
+};
 
 function getPage(codename) {
   return findElement(codename, routes, []);
 }
 
-function findElement(codename, rootElem, rootChain) {
-  var result = undefined;
+// function findElement(codename, rootElem, rootChain) {
+//   var result = undefined;
+//
+//   const props = Object.keys(rootElem);
+//   for (let propName of props) {
+//     if (typeof(rootElem[propName]) !== 'object') {
+//       continue;
+//     }
+//
+//     if (propName === codename) {
+//       result = Object.assign({}, rootElem[propName], {pathToPage: rootChain});
+//     } else if (Object.prototype.toString(rootElem[propName]) ===
+//         '[object Object]') {
+//
+//       result = findElement(codename, rootElem[propName],
+//         [...rootChain, propName]);
+//     }
+//
+//     if (result) {
+//       return result;
+//     }
+//   }
+//
+//   return result;
+// }
 
-  const props = Object.keys(rootElem);
-  for (let propName of props) {
-    if (typeof(rootElem[propName]) !== 'object') {
-      continue;
+function findElement(name) {
+  var result;
+
+  routes.forEach(route => {
+    if (route.name === name) {
+
     }
+  });
 
-    if (propName === codename) {
-      result = Object.assign({}, rootElem[propName], {pathToPage: rootChain});
-    } else if (Object.prototype.toString(rootElem[propName]) ===
-        '[object Object]') {
 
-      result = findElement(codename, rootElem[propName],
-        [...rootChain, propName]);
-    }
-
-    if (result) {
-      return result;
-    }
-  }
-
-  return result;
 }
 
 function constructFullUrls(routes, constructedUrl) {
