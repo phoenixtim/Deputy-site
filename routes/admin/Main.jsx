@@ -8,16 +8,6 @@ var Main = React.createClass({
   },
 
   render() {
-    // var pages = [
-    //   {
-    //     title: 'new1',
-    //     text: 'new 1 text weklfm;lkwvn klw;emlk pweme pewm [PLD,CQKWEOKFW ;KMWIS;LKDMVSKLFOIWRNV SDLKM;SK SKM ;EDM;LS L;MS;EL ;SM ; SMEM;SEMEWRLEKDN RKM;dflmv;dm  vm;slmv;lsmgs mv;ls]',
-    //   },
-    //   {
-    //     title: 'new2',
-    //     text: 'new 2 text',
-    //   },
-    // ];
     var pages = this.props.route.routesModule.getSubroutes(
       this.state.currentRoute.name);
 
@@ -35,11 +25,12 @@ module.exports = Main;
 var Pages = React.createClass({
   render() {
     return (
-      <div className='ui grid'>
+      <div className='ui link cards'>
         {this.props.pages.map((item, index) => <Page
           key={index}
           title={item.pageTitle}
           text=''
+          link={item.fullUrl}
         />)}
       </div>
     );
@@ -49,16 +40,14 @@ var Pages = React.createClass({
 var Page = React.createClass({
   render() {
     return (
-      <div className='four wide column'>
-        <div className='ui card'>
-          <div className='content'>
-            <div className='header'>{this.props.title}</div>
-            <div className='description'>{this.props.text}</div>
-          </div>
-          <div className='extra content'>
-          </div>
+      <a className='card' href={this.props.link}>
+        <div className='content'>
+          <div className='header'>{this.props.title}</div>
+          <div className='description'>{this.props.text}</div>
         </div>
-      </div>
+        <div className='extra content'>
+        </div>
+      </a>
     );
   },
 });

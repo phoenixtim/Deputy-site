@@ -11,17 +11,23 @@ const routes = {
       url: 'admin/',
       pageTitle: 'Управление сайтом',
       pageLink: 'Управление',
-      second: {
-        name: 'second',
+      about: {
+        name: 'about',
         url: 'about/',
         pageTitle: 'О депутате',
         pageLink: 'О депутате',
       },
-      third: {
-        name: 'third',
+      todo: {
+        name: 'todo',
         url: 'todo/',
         pageTitle: 'Наказы',
         pageLink: 'Наказы',
+      },
+      news: {
+        name: 'news',
+        url: 'news/',
+        pageTitle: 'Новости',
+        pageLink: 'Новости',
       },
     },
   },
@@ -77,11 +83,13 @@ function getSubroutes(codename) {
 
   const props = Object.keys(route);
   for (let propName of props) {
-    if (typeof(route[propName]) !== 'object') {
+    let prop = route[propName];
+    if (typeof(prop) !== 'object' ||
+        Object.prototype.toString.call(prop) === '[object Array]') {
       continue;
     }
 
-    subroutes.push(route[propName]);
+    subroutes.push(prop);
   }
 
   return subroutes;
