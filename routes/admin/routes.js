@@ -1,12 +1,4 @@
 const routes = [
-  // {
-  //   name: 'main',
-  //   url: '/',
-  //   pageTitle: 'Сайт',
-  //   pageLink: 'Главная',
-  //   children: [
-  //   ],
-  // },
   {
     name: 'admin',
     url: '/admin/',
@@ -51,36 +43,10 @@ function getPage(codename) {
   return findElement(codename);
 }
 
-// function findElement(codename, rootElem, rootChain) {
-//   var result = undefined;
-//
-//   const props = Object.keys(rootElem);
-//   for (let propName of props) {
-//     if (typeof(rootElem[propName]) !== 'object') {
-//       continue;
-//     }
-//
-//     if (propName === codename) {
-//       result = Object.assign({}, rootElem[propName], {pathToPage: rootChain});
-//     } else if (Object.prototype.toString(rootElem[propName]) ===
-//         '[object Object]') {
-//
-//       result = findElement(codename, rootElem[propName],
-//         [...rootChain, propName]);
-//     }
-//
-//     if (result) {
-//       return result;
-//     }
-//   }
-//
-//   return result;
-// }
-
-function findElement(name, routes = routes) {
+function findElement(name, _routes = routes) {
   var result;
 
-  for (let route of routes) {
+  for (let route of _routes) {
     if (route.name === name) {
       result = route;
       break;
@@ -90,21 +56,10 @@ function findElement(name, routes = routes) {
       result = findElement(name, route.children);
       if (result) break;
     }
-  });
+  }
 
   return result;
 }
-
-// function constructFullUrls(routes, constructedUrl) {
-//   for (var route in routes) {
-//     if (typeof(routes[route]) !== 'object' || !routes[route].url) {
-//       continue;
-//     }
-//
-//     routes[route].fullUrl = constructedUrl + routes[route].url;
-//     constructFullUrls(routes[route], routes[route].fullUrl);
-//   }
-// }
 
 function constructFullUrlsAndRootChain(routes, constructedUrl = '',
     rootChain = []) {
@@ -119,24 +74,6 @@ function constructFullUrlsAndRootChain(routes, constructedUrl = '',
     }
   }
 }
-
-// function getSubroutes(codename) {
-//   var route = getPage(codename);
-//   var subroutes = [];
-//
-//   const props = Object.keys(route);
-//   for (let propName of props) {
-//     let prop = route[propName];
-//     if (typeof(prop) !== 'object' ||
-//         Object.prototype.toString.call(prop) === '[object Array]') {
-//       continue;
-//     }
-//
-//     subroutes.push(prop);
-//   }
-//
-//   return subroutes;
-// }
 
 function getSubroutes(routeName) {
   const route = getPage(routeName);
