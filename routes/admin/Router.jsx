@@ -24,3 +24,12 @@ ReactDOM.render(
   ),
   document.getElementById('site_container')
 );
+
+function constructRoutes(routes) {
+  var constructedRoutes = [];
+  routes.forEach(route => {
+
+  });
+
+  return constructedRoutes;
+}
