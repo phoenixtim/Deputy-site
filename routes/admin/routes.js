@@ -39,7 +39,7 @@ const routes = [
     ],
   },
 ];
-constructFullUrls(routes, '');
+constructFullUrlsAndRootChain(routes);
 
 module.exports = {
   routes: routes,
@@ -48,7 +48,7 @@ module.exports = {
 };
 
 function getPage(codename) {
-  return findElement(codename, routes, []);
+  return findElement(codename);
 }
 
 // function findElement(codename, rootElem, rootChain) {
@@ -77,43 +77,68 @@ function getPage(codename) {
 //   return result;
 // }
 
-function findElement(name) {
+function findElement(name, routes = routes) {
   var result;
 
-  routes.forEach(route => {
+  for (let route of routes) {
     if (route.name === name) {
+      result = route;
+      break;
+    }
 
+    if (route.children) {
+      result = findElement(name, route.children);
+      if (result) break;
     }
   });
 
-
+  return result;
 }
 
-function constructFullUrls(routes, constructedUrl) {
-  for (var route in routes) {
-    if (typeof(routes[route]) !== 'object' || !routes[route].url) {
-      continue;
-    }
+// function constructFullUrls(routes, constructedUrl) {
+//   for (var route in routes) {
+//     if (typeof(routes[route]) !== 'object' || !routes[route].url) {
+//       continue;
+//     }
+//
+//     routes[route].fullUrl = constructedUrl + routes[route].url;
+//     constructFullUrls(routes[route], routes[route].fullUrl);
+//   }
+// }
 
-    routes[route].fullUrl = constructedUrl + routes[route].url;
-    constructFullUrls(routes[route], routes[route].fullUrl);
+function constructFullUrlsAndRootChain(routes, constructedUrl = '',
+    rootChain = []) {
+  for (let route in routes) {
+    let currentRoute = routes[route];
+    currentRoute.fullUrl = constructedUrl + currentRoute.url;
+    currentRoute.pathToPage = rootChain;
+
+    if (currentRoute.children) {
+      constructFullUrlsAndRootChain(currentRoute.children, currentRoute.fullUrl,
+        currentRoute.pathToPage.concat(currentRoute.name));
+    }
   }
 }
 
-function getSubroutes(codename) {
-  var route = getPage(codename);
-  var subroutes = [];
+// function getSubroutes(codename) {
+//   var route = getPage(codename);
+//   var subroutes = [];
+//
+//   const props = Object.keys(route);
+//   for (let propName of props) {
+//     let prop = route[propName];
+//     if (typeof(prop) !== 'object' ||
+//         Object.prototype.toString.call(prop) === '[object Array]') {
+//       continue;
+//     }
+//
+//     subroutes.push(prop);
+//   }
+//
+//   return subroutes;
+// }
 
-  const props = Object.keys(route);
-  for (let propName of props) {
-    let prop = route[propName];
-    if (typeof(prop) !== 'object' ||
-        Object.prototype.toString.call(prop) === '[object Array]') {
-      continue;
-    }
-
-    subroutes.push(prop);
-  }
-
-  return subroutes;
+function getSubroutes(routeName) {
+  const route = getPage(routeName);
+  return route ? route.children : undefined;
 }
