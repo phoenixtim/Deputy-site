@@ -1,36 +1,41 @@
+import Site from './Site.jsx';
+import Main from './Main.jsx';
+
 const routes = [
   {
     name: 'admin',
     url: '/admin/',
     pageTitle: 'Управление сайтом',
     pageLink: 'Управление',
-    component: 'Site',
-    indexComponent: 'Main',
+    component: Site,
+    indexComponent: Main,
     children: [
       {
         name: 'about',
         url: 'about/',
-        component: 'Site',
+        component: Main,
         pageTitle: 'О депутате',
         pageLink: 'О депутате',
       },
       {
         name: 'todo',
         url: 'todo/',
-        component: 'Site',
+        component: Main,
         pageTitle: 'Наказы',
         pageLink: 'Наказы',
       },
       {
         name: 'news',
         url: 'news/',
-        component: 'Site',
+        component: Main,
         pageTitle: 'Новости',
         pageLink: 'Новости',
       },
     ],
   },
 ];
+
+var routeNames = [];
 constructFullUrlsAndRootChain(routes);
 
 module.exports = {
@@ -65,6 +70,11 @@ function constructFullUrlsAndRootChain(routes, constructedUrl = '',
     rootChain = []) {
   for (let route in routes) {
     let currentRoute = routes[route];
+    if (routeNames.indexOf(currentRoute.name) !== -1) {
+      throw 'Route names must be unique! Duplicated name is "' +
+        currentRoute.name + '".';
+    }
+
     currentRoute.fullUrl = constructedUrl + currentRoute.url;
     currentRoute.pathToPage = rootChain;
 

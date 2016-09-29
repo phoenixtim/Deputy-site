@@ -45,8 +45,8 @@ var Page = React.createClass({
           <div className='header'>{this.props.title}</div>
           <div className='description'>{this.props.text}</div>
         </div>
-        <div className='extra content'>
-        </div>
+        {/* <div className='extra content'>
+        </div> */}
       </a>
     );
   },
