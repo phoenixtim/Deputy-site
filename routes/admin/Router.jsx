@@ -27,8 +27,13 @@ ReactDOM.render(
 
 function constructRoutes(routes) {
   var constructedRoutes = [];
-  routes.forEach(route => {
 
+  routes.forEach(route => {
+    let routeChildren = route.children ?
+      route.children.map(child => {
+
+      }) :
+      [];
   });
 
   return constructedRoutes;
