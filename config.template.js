@@ -14,4 +14,6 @@ module.exports = {
     dialect: 'postgres',
     host: 'localhost',
   },
+
+  DEFAULT_LIST_LIMIT: 20,
 };

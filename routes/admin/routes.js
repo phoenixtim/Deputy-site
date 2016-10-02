@@ -1,5 +1,6 @@
 import Site from './Site.jsx';
 import Main from './Main.jsx';
+import NewsPage from './News.jsx';
 
 const routes = [
   {
@@ -27,7 +28,7 @@ const routes = [
       {
         name: 'news',
         url: 'news/',
-        component: Main,
+        component: NewsPage,
         pageTitle: 'Новости',
         pageLink: 'Новости',
       },

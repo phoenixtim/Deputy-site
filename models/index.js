@@ -8,10 +8,12 @@ var sequelize = new Sequelize(config.DB_SETTINGS.name, config.DB_SETTINGS.user,
   dialect: config.DB_SETTINGS.dialect,
 });
 
-var Todo = require('./Todo');
+const Todo = require('./Todo');
+// const News = require('./News');
 
 module.exports = {
   sequelize: sequelize,
 
   Todo: sequelize.define(...Todo),
+  News: sequelize.define(...require('./News')),
 };

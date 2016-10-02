@@ -2,14 +2,17 @@ var express = require('express');
 
 const globals = require('./globals');
 const config = require(__base + 'config');
-const router = require(__base + 'routes');
-const db = require(__base + 'models');
 
 var app = express();
 process.env.NODE_ENV = config.NODE_ENV;
 __env = process.env.NODE_ENV;
 
+const router = require(__base + 'routes');
+const db = require(__base + 'models');
+const graphs = require(__base + 'graphs');
+
 app.use('/', express.static(__base + 'public/'));
+app.use(graphs);
 app.use(router);
 
 var address = config.APP ?
